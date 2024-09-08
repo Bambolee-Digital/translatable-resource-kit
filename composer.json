@@ -1,6 +1,6 @@
 {
   "name": "bambolee-digital/translatable-resource-kit",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Enhanced translation capabilities for Laravel models with dynamic JSON handling, optimized for app development",
   "type": "library",
   "license": "MIT",

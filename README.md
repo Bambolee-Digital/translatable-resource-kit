@@ -56,7 +56,7 @@ If you want to disable the automatic registration of the middleware, set the `di
 ### 1. Use the TranslatesAttributes trait in your model:
 
 ```php
-use BamboleeDigital\TranslatableResourceKit\TranslatesAttributes;
+use BamboleeDigital\TranslatableResourceKit\Http\Traits\TranslatesAttributes;
 use Spatie\Translatable\HasTranslations;
 
 class Product extends Model
@@ -72,7 +72,7 @@ class Product extends Model
 ### 2. Create a Resource for your model:
 
 ```php
-use BamboleeDigital\TranslatableResourceKit\TranslatableResource;
+use BamboleeDigital\TranslatableResourceKit\Http\Resources\TranslatableResource;
 
 class ProductResource extends TranslatableResource
 {
@@ -83,7 +83,7 @@ class ProductResource extends TranslatableResource
 ### 3. Create a Collection for your model:
 
 ```php
-use BamboleeDigital\TranslatableResourceKit\TranslatableCollection;
+use BamboleeDigital\TranslatableResourceKit\Http\Resources\TranslatableCollection;
 
 class ProductCollection extends TranslatableCollection
 {
@@ -116,7 +116,7 @@ If you've disabled the automatic middleware registration, you can manually regis
 
 ```php
 use Illuminate\Support\Facades\Route;
-use BamboleeDigital\TranslatableResourceKit\Middleware\SetLocale;
+use BamboleeDigital\TranslatableResourceKit\Http\Middleware\SetLocale;
 
 public function boot()
 {
@@ -127,7 +127,7 @@ public function boot()
 2. In your `routes/api.php`:
 
 ```php
-use BamboleeDigital\TranslatableResourceKit\Middleware\SetLocale;
+use BamboleeDigital\TranslatableResourceKit\Http\Middleware\SetLocale;
 
 Route::middleware([SetLocale::class])->group(function () {
     // Your API routes here

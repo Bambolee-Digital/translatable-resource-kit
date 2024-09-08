@@ -1,17 +1,14 @@
 <?php
 
-namespace BamboleeDigital\TranslatableResourceKit;
+namespace BamboleeDigital\TranslatableResourceKit\Http\Traits;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Spatie\Translatable\HasTranslations;
 
 trait TranslatesAttributes
 {
-    use HasTranslations;
-
     protected function getMaxRecursionDepth(): int
     {
         return config('translatable-resource-kit.max_recursion_depth', 5);
@@ -59,6 +56,11 @@ trait TranslatesAttributes
         })->all();
     }
 
+    protected function getRelationsToTranslate(): array
+    {
+        return array_merge($this->with ?? [], $this->appends ?? []);
+    }
+
     protected function addTranslatedRelations(array $attributes, string $locale, int $depth): array
     {
         foreach ($this->getRelationsToTranslate() as $relation) {
@@ -73,6 +75,7 @@ trait TranslatesAttributes
                 $attributes[$snakeRelation] = $translatedRelation;
                 $attributes[$camelRelation] = $translatedRelation;
 
+                // Apply custom key mapping if defined
                 if (isset($this->relationToJsonKeyMap[$relation])) {
                     $customKey = $this->relationToJsonKeyMap[$relation];
                     $attributes[$customKey] = $translatedRelation;
@@ -81,11 +84,6 @@ trait TranslatesAttributes
         }
 
         return $attributes;
-    }
-
-    protected function getRelationsToTranslate(): array
-    {
-        return array_merge($this->with ?? [], $this->appends ?? []);
     }
 
     protected function translateRelation($relation, string $locale, int $depth)
@@ -120,14 +118,17 @@ trait TranslatesAttributes
 
     public function getRelationValue($key)
     {
+        // If the relation is already loaded, return it
         if ($this->relationLoaded($key)) {
             return $this->getRelation($key);
         }
 
+        // If the key is a method on the model, load and return the relation
         if (method_exists($this, $key) && $this->$key() instanceof Relation) {
             return $this->$key()->getResults();
         }
 
+        // If the attribute exists but isn't a relation, return it
         if (array_key_exists($key, $this->attributes)) {
             return $this->getAttribute($key);
         }

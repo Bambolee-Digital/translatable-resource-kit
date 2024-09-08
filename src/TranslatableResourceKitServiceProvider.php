@@ -4,7 +4,7 @@ namespace BamboleeDigital\TranslatableResourceKit;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use BamboleeDigital\TranslatableResourceKit\Middleware\SetLocale;
+use BamboleeDigital\TranslatableResourceKit\Http\Middleware\SetLocale;
 
 class TranslatableResourceKitServiceProvider extends ServiceProvider
 {

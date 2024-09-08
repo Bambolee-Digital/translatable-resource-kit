@@ -2,6 +2,9 @@
 
 All notable changes to `bambolee-digital/translatable-resource-kit` will be documented in this file.
 
+## [1.0.5] - 2024-09-10
+- The package has been restructured
+
 ## [1.0.4] - 2024-09-10
 
 ### Added

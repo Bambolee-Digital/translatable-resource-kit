@@ -1,6 +1,6 @@
 <?php
 
-namespace BamboleeDigital\TranslatableResourceKit\Middleware;
+namespace BamboleeDigital\TranslatableResourceKit\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
@@ -29,8 +29,8 @@ class SetLocale
         $locale = $request->input('lang', config('app.locale'));
 
         // Check if the requested language is supported, otherwise set the fallback
-        if (!in_array($locale, config('translatable-resource-kit.supported_locales', [config('app.fallback_locale')]))) {
-            $locale = config('app.fallback_locale');
+        if (!in_array($locale, config('translatable-resource-kit.supported_locales', [config('app.fallback_locale', 'en')]))) {
+            $locale = config('app.fallback_locale', 'en');
         }
 
         // Set the application locale

@@ -1,6 +1,6 @@
 <?php
 
-namespace BamboleeDigital\TranslatableResourceKit;
+namespace BamboleeDigital\TranslatableResourceKit\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 

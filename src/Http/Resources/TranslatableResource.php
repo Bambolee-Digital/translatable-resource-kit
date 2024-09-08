@@ -1,6 +1,7 @@
 <?php
 
-namespace BamboleeDigital\TranslatableResourceKit;
+namespace BamboleeDigital\TranslatableResourceKit\Http\Resources;
+
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,9 +15,11 @@ class TranslatableResource extends JsonResource
     protected function getTranslatedArray($request)
     {
         $data = parent::toArray($request);
+
         if (method_exists($this->resource, 'translatedAttributes')) {
             $data = array_merge($data, $this->resource->translatedAttributes());
         }
+
         return $data;
     }
 }
