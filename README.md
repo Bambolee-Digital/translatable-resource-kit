@@ -1,6 +1,8 @@
 # Bambolee Translatable Resource Kit
 
-[Badges permanecem inalterados]
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/bambolee-digital/translatable-resource-kit.svg?style=flat-square)](https://packagist.org/packages/bambolee-digital/translatable-resource-kit)
+[![Total Downloads](https://img.shields.io/packagist/dt/bambolee-digital/translatable-resource-kit.svg?style=flat-square)](https://packagist.org/packages/bambolee-digital/translatable-resource-kit)
+[![License](https://img.shields.io/packagist/l/bambolee-digital/translatable-resource-kit.svg?style=flat-square)](https://packagist.org/packages/bambolee-digital/translatable-resource-kit)
 
 The Bambolee Translatable Resource Kit is a powerful extension for Laravel applications using Spatie's Laravel Translatable package. It simplifies the handling of translated attributes in API responses and dynamic JSON structures, making it easier to develop multilingual applications.
 
@@ -11,7 +13,7 @@ The Bambolee Translatable Resource Kit is a powerful extension for Laravel appli
 ## Installation
 
 [Esta seção permanece inalterada]
-
+git
 ## Configuration
 
 After installation, publish the configuration file:
