@@ -1,0 +1,53 @@
+# Composer
+/vendor/
+composer.lock
+
+# PHPUnit
+/phpunit.xml
+/.phpunit.result.cache
+
+# Build files
+/build/
+
+# IDE and editor files
+/.idea/
+/.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Laravel specific (if you're testing with a Laravel app)
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/.env
+/.env.backup
+/.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+# Log files
+*.log
+
+# Cache files
+*.cache
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Other
+*.bak
+*.orig

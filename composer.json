@@ -1,0 +1,41 @@
+{
+  "name": "bambolee-digital/translatable-resource-kit",
+  "version": "1.0.0",
+  "description": "Enhanced translation capabilities for Laravel models with dynamic JSON handling, optimized for app development",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+      {
+          "name": "Bambolee Digital",
+          "email": "contact@bambolee.digital"
+      }
+  ],
+  "require": {
+      "php": "^8.0",
+      "illuminate/support": "^8.0|^9.0|^10.0",
+      "spatie/laravel-translatable": "^5.0|^6.0"
+  },
+  "require-dev": {
+      "orchestra/testbench": "^6.0|^7.0|^8.0",
+      "phpunit/phpunit": "^9.0|^10.0"
+  },
+  "autoload": {
+      "psr-4": {
+          "BamboleeDigital\\TranslatableResourceKit\\": "src/"
+      }
+  },
+  "autoload-dev": {
+      "psr-4": {
+          "BamboleeDigital\\TranslatableResourceKit\\Tests\\": "tests/"
+      }
+  },
+  "extra": {
+      "laravel": {
+          "providers": [
+              "BamboleeDigital\\TranslatableResourceKit\\TranslatableResourceKitServiceProvider"
+          ]
+      }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
