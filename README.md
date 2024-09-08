@@ -6,13 +6,24 @@
 
 The Bambolee Translatable Resource Kit is a powerful extension for Laravel applications using Spatie's Laravel Translatable package. It simplifies the handling of translated attributes in API responses and dynamic JSON structures, making it easier to develop multilingual applications.
 
+
 ## Features
 
-[Esta seção permanece inalterada]
+- Seamless integration with Spatie's Laravel Translatable
+- Dynamic handling of translated attributes in JSON responses
+- Support for nested relations and deep translation
+- Customizable recursion depth for nested translations
+- Easy-to-use Resource and Collection classes for API responses
+- Compatible with Laravel 8.x, 9.x, 10.x, and 11.x
 
 ## Installation
 
-[Esta seção permanece inalterada]
+You can install the package via composer:
+
+```bash
+composer require bambolee-digital/translatable-resource-kit
+```
+
 git
 ## Configuration
 
