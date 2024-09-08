@@ -6,7 +6,6 @@
 
 The Bambolee Translatable Resource Kit is a powerful extension for Laravel applications using Spatie's Laravel Translatable package. It simplifies the handling of translated attributes in API responses and dynamic JSON structures, making it easier to develop multilingual applications.
 
-
 ## Features
 
 - Seamless integration with Spatie's Laravel Translatable
@@ -24,7 +23,6 @@ You can install the package via composer:
 composer require bambolee-digital/translatable-resource-kit
 ```
 
-git
 ## Configuration
 
 After installation, publish the configuration file:
@@ -55,7 +53,58 @@ If you want to disable the automatic registration of the middleware, set the `di
 
 ## Usage
 
-[Seções 1-4 permanecem inalteradas]
+### 1. Use the TranslatesAttributes trait in your model:
+
+```php
+use BamboleeDigital\TranslatableResourceKit\TranslatesAttributes;
+use Spatie\Translatable\HasTranslations;
+
+class Product extends Model
+{
+    use HasTranslations, TranslatesAttributes;
+
+    public $translatable = ['name', 'description'];
+
+    // ...
+}
+```
+
+### 2. Create a Resource for your model:
+
+```php
+use BamboleeDigital\TranslatableResourceKit\TranslatableResource;
+
+class ProductResource extends TranslatableResource
+{
+    // You can add custom logic here if needed
+}
+```
+
+### 3. Create a Collection for your model:
+
+```php
+use BamboleeDigital\TranslatableResourceKit\TranslatableCollection;
+
+class ProductCollection extends TranslatableCollection
+{
+    // You can add custom logic here if needed
+}
+```
+
+### 4. Use in your controller:
+
+```php
+public function index()
+{
+    $products = Product::all();
+    return new ProductCollection($products);
+}
+
+public function show(Product $product)
+{
+    return new ProductResource($product);
+}
+```
 
 ### 5. Using the middleware:
 
@@ -98,11 +147,66 @@ protected $middlewareGroups = [
 
 ## Example
 
-[Esta seção permanece inalterada]
+Here's an example of how the JSON response changes when using this package:
+
+Before:
+
+```json
+{
+  "id": 1,
+  "name": {
+    "en": "Laptop",
+    "es": "Portátil",
+    "pt": "Notebook"
+  },
+  "description": {
+    "en": "Powerful laptop for professionals",
+    "es": "Portátil potente para profesionales",
+    "pt": "Notebook potente para profissionais"
+  },
+  "price": 999.99
+}
+```
+
+After (assuming the current locale is 'pt', set via `?lang=pt`):
+
+```json
+{
+  "id": 1,
+  "name": "Notebook",
+  "description": "Notebook potente para profissionais",
+  "price": 999.99
+}
+```
+
+As you can see, the translated fields are automatically resolved to the current locale, simplifying the structure and making it easier to work with in frontend applications.
 
 ## Advanced Usage
 
-[Esta seção permanece inalterada]
+### Customizing Recursion Depth
+
+You can customize the maximum recursion depth for nested translations in the `config/translatable-resource-kit.php` file:
+
+```php
+return [
+    'max_recursion_depth' => 3, // Default is 5
+];
+```
+
+### Handling Nested Relations
+
+The `TranslatesAttributes` trait automatically handles nested relations. Make sure your relations are properly defined in your model's `$with` property:
+
+```php
+class Product extends Model
+{
+    use HasTranslations, TranslatesAttributes;
+
+    protected $with = ['category', 'tags'];
+
+    // ...
+}
+```
 
 ### Customizing the Query Parameter
 
@@ -114,4 +218,23 @@ php artisan vendor:publish --provider="BamboleeDigital\TranslatableResourceKit\T
 
 Then, edit the published middleware file in `app/Http/Middleware/SetLocale.php` to change the query parameter name.
 
-[As seções restantes permanecem inalteradas]
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+## Security
+
+If you discover any security-related issues, please email security@bambolee.digital instead of using the issue tracker.
+
+## Credits
+
+- [Bambolee Digital](https://github.com/bambolee-digital)
+- [All Contributors](../../contributors)
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
