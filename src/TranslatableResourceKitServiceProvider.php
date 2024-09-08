@@ -13,8 +13,10 @@ class TranslatableResourceKitServiceProvider extends ServiceProvider
             __DIR__.'/../config/translatable-resource-kit.php' => config_path('translatable-resource-kit.php'),
         ], 'config');
 
-        // Register the middleware
-        $this->app['router']->aliasMiddleware('set-locale', SetLocale::class);
+        // Register the middleware only if it's not disabled in the config
+        if (!config('translatable-resource-kit.disable_middleware', false)) {
+            $this->app['router']->aliasMiddleware('set-locale', SetLocale::class);
+        }
     }
 
     public function register()

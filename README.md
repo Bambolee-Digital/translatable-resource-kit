@@ -33,6 +33,18 @@ php artisan vendor:publish --provider="BamboleeDigital\TranslatableResourceKit\T
 
 This will create a `config/translatable-resource-kit.php` file where you can customize the behavior of the package.
 
+### Disabling the Middleware
+
+By default, the package registers the `set-locale` middleware automatically. If you want to disable this behavior, you can set the `disable_middleware` option to `true` in your `config/translatable-resource-kit.php` file:
+
+```php
+return [
+    // ...
+    'disable_middleware' => true,
+    // ...
+];
+```
+
 ## Usage
 
 ### 1. Use the TranslatesAttributes trait in your model:
@@ -88,32 +100,26 @@ public function show(Product $product)
 }
 ```
 
-### 5. Set up the middleware (Optional but recommended):
+### 5. Using the middleware:
 
-In your `app/Providers/AppServiceProvider.php`, add the following to the `boot` method:
-
-```php
-use BamboleeDigital\TranslatableResourceKit\Middleware\SetLocale;
-
-public function boot()
-{
-    // ...
-
-    Route::aliasMiddleware('set.locale', SetLocale::class);
-
-    // ...
-}
-```
-
-Then, you can use the middleware in your routes or route groups:
+The `set-locale` middleware is automatically registered by the package. You can use it in your routes or route groups:
 
 ```php
-Route::middleware(['set.locale'])->group(function () {
+Route::middleware(['set-locale'])->group(function () {
     // Your routes here
 });
 ```
 
 With this middleware in place, you can set the locale by adding a `lang` query parameter to your requests, e.g., `?lang=pt` for Portuguese. This allows easy language switching in your API calls.
+
+If you've disabled the automatic middleware registration, you'll need to register it manually in your `app/Http/Kernel.php` file:
+
+```php
+protected $routeMiddleware = [
+    // ...
+    'set-locale' => \BamboleeDigital\TranslatableResourceKit\Middleware\SetLocale::class,
+];
+```
 
 ## Example
 
