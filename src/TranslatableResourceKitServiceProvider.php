@@ -2,6 +2,7 @@
 
 namespace BamboleeDigital\TranslatableResourceKit;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use BamboleeDigital\TranslatableResourceKit\Middleware\SetLocale;
 
@@ -15,7 +16,9 @@ class TranslatableResourceKitServiceProvider extends ServiceProvider
 
         // Register the middleware only if it's not disabled in the config
         if (!config('translatable-resource-kit.disable_middleware', false)) {
-            $this->app['router']->aliasMiddleware('set-locale', SetLocale::class);
+            $router = $this->app->make(Router::class);
+            $middlewareGroup = config('translatable-resource-kit.middleware_group', 'api');
+            $router->pushMiddlewareToGroup($middlewareGroup, SetLocale::class);
         }
     }
 

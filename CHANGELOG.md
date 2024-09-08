@@ -2,6 +2,25 @@
 
 All notable changes to `bambolee-digital/translatable-resource-kit` will be documented in this file.
 
+## [1.0.4] - 2024-09-10
+
+### Added
+- New configuration option `middleware_group` to specify which middleware group the `SetLocale` middleware should be added to
+- Ability to publish and customize the `SetLocale` middleware
+
+### Changed
+- Updated the `TranslatableResourceKitServiceProvider` to use the new `middleware_group` configuration option
+- Improved middleware registration process for better flexibility
+
+### Updated
+- README with more detailed instructions on middleware usage and customization
+- Configuration file to include the new `middleware_group` option
+
+### Fixed
+- Issue with middleware registration in Laravel 11 due to the absence of `Kernel.php`
+
+[Previous changelog entries remain unchanged]
+
 ## [1.0.3] - 2024-09-08
 
 ### Added
