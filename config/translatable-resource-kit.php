@@ -1,12 +1,8 @@
 <?php
 
 return [
+    'debug' => false,
     'max_recursion_depth' => 5,
-
     'middleware_group' => 'api',
-    
-    // Supported locales for the application
-    'supported_locales' => ['en', 'es', 'fr'], // Add or modify as needed
-
-    // ... any other configurations
+    'supported_locales' => ['en', 'es', 'pt'], // Add or modify as needed
 ];

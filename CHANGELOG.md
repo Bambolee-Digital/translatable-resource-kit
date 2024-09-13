@@ -2,6 +2,11 @@
 
 All notable changes to `bambolee-digital/translatable-resource-kit` will be documented in this file.
 
+## [1.0.6] - 2024-09-13
+- Change SetLocale Improved functioning
+- Added debug system
+- Update readme.md
+
 ## [1.0.5] - 2024-09-10
 - The package has been restructured
 

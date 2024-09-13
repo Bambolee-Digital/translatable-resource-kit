@@ -37,15 +37,50 @@ You can customize the middleware behavior in this configuration file:
 
 ```php
 return [
+    // disable debug 
+    'debug' => false,
     // Disable automatic middleware registration
     'disable_middleware' => false,
-
     // Specify the middleware group (default is 'api')
     'middleware_group' => 'api',
-
     // ... other configurations
 ];
 ```
+### Added set_locale
+
+To apply the SetLocale middleware to your API routes, you can add it to your `routes/api.php` file. Here's a comprehensive example of how to do this:
+
+
+```php
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\CategoryController;
+
+Route::middleware(['set_locale', SetLocale::class])->group(function () {
+    // Product routes
+    Route::prefix('products')->group(function () {
+        Route::get('/', [ProductController::class, 'index']);
+        Route::get('/{product}', [ProductController::class, 'show']);
+        Route::post('/', [ProductController::class, 'store']);
+        Route::put('/{product}', [ProductController::class, 'update']);
+        Route::delete('/{product}', [ProductController::class, 'destroy']);
+    });
+
+    // Category routes
+    Route::prefix('categories')->group(function () {
+        Route::get('/', [CategoryController::class, 'index']);
+        Route::get('/{category}', [CategoryController::class, 'show']);
+        Route::post('/', [CategoryController::class, 'store']);
+        Route::put('/{category}', [CategoryController::class, 'update']);
+        Route::delete('/{category}', [CategoryController::class, 'destroy']);
+    });
+
+    // Add more route groups as needed
+});
+```
+
+1. Open your `routes/api.php` file.
+2. Add the middleware to your API route group like this:
 
 ### Disabling the Middleware
 
@@ -120,7 +155,8 @@ use BamboleeDigital\TranslatableResourceKit\Http\Middleware\SetLocale;
 
 public function boot()
 {
-    Route::pushMiddlewareToGroup('api', SetLocale::class);
+    Route::aliasMiddleware('set_locale', SetLocale::class);
+    Route::pushMiddlewareToGroup('api', 'set_locale');
 }
 ```
 
